@@ -34,7 +34,7 @@ jobs:
           command: |
             set -x
             docker-compose build
-	    docker images | grep testci20
+            docker images | grep testci20
 
       - deploy:
           name: Build and push Docker image
