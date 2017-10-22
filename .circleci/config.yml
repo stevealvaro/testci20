@@ -6,7 +6,7 @@ jobs:
       working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
       steps:
        - checkout
-       # ... steps for building/testing app ...
+       
        - setup_remote_docker   # (2)
             docker_layer_caching: true # (3)
       # use a primary image that already has Docker (recommended)
@@ -33,8 +33,9 @@ jobs:
        - run:
             name: Push images to registry
             command: |
-	      set -x
-	      docker login -e DOCKER_HUB_EMAIL -u DOCKER_HUB_USER_ID -p DOCKER_HUB_PWD
-	      docker tag testci20_db $DOCKER_HUB_USER_ID/testci20_db:$CIRCLE_SHA1
-	      docker tag testci20_db $DOCKER_HUB_USER_ID/testci20_db:latest
-	      docker tag testci20_webapp
+              set -x
+              docker login -e DOCKER_HUB_EMAIL -u DOCKER_HUB_USER_ID -p DOCKER_HUB_PWD
+              docker tag testci20_db $DOCKER_HUB_USER_ID/testci20_db:$CIRCLE_SHA1
+              docker tag testci20_db $DOCKER_HUB_USER_ID/testci20_db:latest
+              docker tag testci20_mydbapp $DOCKER_HUB_USER_ID/testci20_mydbapp:$CIRCLE_SHA1
+              docker tag testci20_mydbapp $DOCKER_HUB_USER_ID/testci20_mydbapp:latest
