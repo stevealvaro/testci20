@@ -34,13 +34,12 @@ jobs:
           command: |
             set -x
             docker-compose build
-            docker images | grep testci20
 
       - deploy:
           name: Build and push Docker image
           command: |
             docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
-            docker tag testci20_db $DOCKER_HUB_USER_ID/testci20_db:$CIRCLE_SHA1
-            docker tag testci20_db $DOCKER_HUB_USER_ID/testci20_db:latest
+            docker tag mydb $DOCKER_HUB_USER_ID/testci20_db:$CIRCLE_SHA1
+            docker tag mydb $DOCKER_HUB_USER_ID/testci20_db:latest
             docker push $DOCKER_HUB_USER_ID/testci20_db:latest
 

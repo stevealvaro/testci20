@@ -9,6 +9,7 @@ services:
 
    db:
       build: ./db
+      image: mydb:latest
       volumes:
         - db_data:/var/lib/postgresql/data
       container_name: db
