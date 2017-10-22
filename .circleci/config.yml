@@ -5,13 +5,13 @@ jobs:
        - image: golang:1.6.4   # (1)
       working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
       steps:
-        - checkout
+       - checkout
        # ... steps for building/testing app ...
-        - setup_remote_docker   # (2)
-             docker_layer_caching: true # (3)
+       - setup_remote_docker   # (2)
+            docker_layer_caching: true # (3)
       # use a primary image that already has Docker (recommended)
       # or install it during a build like we do here
-         - run:
+       - run:
             name: Install Docker client
             command: |
               set -x
@@ -19,20 +19,20 @@ jobs:
               curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
               tar -xz -C /tmp -f /tmp/docker-$VER.tgz
               mv /tmp/docker/* /usr/bin
-         - run:
+       - run:
             name: Install Docker Compose
     	    command: |
 	      set -x
 	      curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 	      chmod +x /usr/local/bin/docker-compose
-	 - run:
+       - run:
 	    name: Build images
 	    command: |
 	      set -x
 	      docker-compose build
-	 - run:
-	    name: Push images to registry
-	    command: |
+       - run:
+            name: Push images to registry
+            command: |
 	      set -x
 	      docker login -e DOCKER_HUB_EMAIL -u DOCKER_HUB_USER_ID -p DOCKER_HUB_PWD
 	      docker tag testci20_db $DOCKER_HUB_USER_ID/testci20_db:$CIRCLE_SHA1
