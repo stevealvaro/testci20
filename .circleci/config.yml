@@ -30,7 +30,7 @@ jobs:
             chmod +x /usr/local/bin/docker-compose
 
       - run:
-          name: Start container and verify it's working
+          name: Build docker images using docker-compose
           command: |
             set -x
             docker-compose build
